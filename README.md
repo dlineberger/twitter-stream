@@ -3,7 +3,7 @@ twitter-stream
 
 Sample web application that tracks recently retweeted tweets.
 
-To run, you need to have a working Node.js installation on your machine. Then, type:
+To run, you need to have a working Node.js installation on your machine. Next, open server.js and add your own Twitter API keys. Then, type:
 
     node server.js
     
