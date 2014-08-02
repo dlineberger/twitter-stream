@@ -1,0 +1,33 @@
+<html ng-app="retweetApp">
+	<head>
+		<title>Top 10 Retweets</title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	</head>
+	<body ng-controller="MainCtrl">
+		<h2 class="title text-center">Top 10 retweets for the past <%= minutesUntilStale %> minutes</h2>
+		<div class="tweet-container center-block">
+			<div ng-repeat="tweet in tweets track by tweet.id_str | orderBy:tweet.retweets.length:false">
+				<blockquote class="twitter-tweet">
+					<div class="original-tweet">
+						<p>{{tweet.text}}</p>&mdash; {{tweet.user.name}} (@{{tweet.user.screen_name}}) <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/statuses/{{tweet.id_str}}">{{tweet.created_at}}</a>
+					</div>
+					<div class="retweet-count">
+						<div class="tweet-count text-center">{{tweet.retweets.length}}</div>
+						<div class="retweets-text text-center"><ng-pluralize count="tweet.retweets.length"
+                 when="{'1': 'Retweet',
+                     'other': 'Retweets'}">
+</ng-pluralize></div>
+					</div>
+				</blockquote>
+			</div>
+		</div>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-sanitize.min.js"></script>
+		<script src="MainCtrl.js"></script>
+	</body>
+</html>
